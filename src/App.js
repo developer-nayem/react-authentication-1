@@ -17,7 +17,7 @@ function App() {
   })
 
   const provider = new GoogleAuthProvider();
-  const handleSignIn = () => {   
+  const handleSignIn = () => {   // sign in
   const auth = getAuth();
     signInWithPopup(auth, provider)
     .then(res => {
@@ -36,7 +36,7 @@ function App() {
       console.log(err.message);
     })
   }
-  const handleSignOut = () => {
+  const handleSignOut = () => {    // sign out
     const auth = getAuth();
     signOut(auth)
     .then(res => {
@@ -53,6 +53,15 @@ function App() {
     })
   }
 
+  const handleChange = (event) => {    // Change Even for input
+    const input = event.target
+    console.log(input.name, input.value);
+  }
+
+  const handleSubmit = () => {    // submit button
+    console.log('submit');
+  }
+
   return (
     <div className="App">
       {
@@ -66,6 +75,16 @@ function App() {
           <img src={user.photo} alt="..."></img>
         </div>
       }
+
+      <h1>Our own Authentication</h1> 
+      <form onSubmit={handleSubmit}>
+      <input type="text" onBlur={handleChange} placeholder='Enter your email' name='email' required></input><br/>
+      <input type="password" onBlur={handleChange} placeholder='Enter your password' name='password' required></input><br/>
+      <input type="submit" value="submit" /><br/>
+
+
+      </form>
+
     </div>
   );
 }
